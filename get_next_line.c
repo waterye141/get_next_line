@@ -6,7 +6,7 @@
 /*   By: aboughad <aboughad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/16 10:29:35 by aboughad          #+#    #+#             */
-/*   Updated: 2026/11/19 14:08:02 by aboughad         ###   ########.fr       */
+/*   Updated: 2026/11/19 16:17:47 by aboughad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 char	*extract_line(char *s, int end)
 {
 	char	*line;
-	
+
 	line = malloc(end + 1);
 	if (!line)
 		return (NULL);
@@ -33,6 +33,8 @@ char	*get_next_line(int fd)
 	char		*temp;
 	int			bytes_read;
 
+	if (BUFFER_SIZE <= 0)
+		return (NULL);
 	temp = malloc(BUFFER_SIZE + 1);
 	if (!temp)
 		return (NULL);
