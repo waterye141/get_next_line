@@ -6,7 +6,7 @@
 /*   By: aboughad <aboughad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/16 10:29:35 by aboughad          #+#    #+#             */
-/*   Updated: 2026/11/19 16:52:03 by aboughad         ###   ########.fr       */
+/*   Updated: 2026/11/19 17:27:09 by aboughad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,16 @@ char	*get_next_line(int fd)
 		bytes_read = read(fd, temp, BUFFER_SIZE);
 		if (bytes_read <= 0)
 		{
+			free(temp);
 			line = stash[fd];
 			stash[fd] = NULL;
-			return (free(temp), line);
+			return (line);
 		}
 		temp[bytes_read] = '\0';
 		stash[fd] = ft_strjoin(stash[fd], temp);
 	}
+	free(temp);
 	line = extract_line(stash[fd], find_newline(stash[fd]) + 1);
 	stash[fd] = ft_substr(stash[fd], find_newline(stash[fd]) + 1);
-	return (free(temp), line);
+	return (line);
 }

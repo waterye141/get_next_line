@@ -6,7 +6,7 @@
 /*   By: aboughad <aboughad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/16 15:36:52 by aboughad          #+#    #+#             */
-/*   Updated: 2026/11/19 16:44:13 by aboughad         ###   ########.fr       */
+/*   Updated: 2026/11/19 17:45:50 by aboughad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int	find_newline(char *s)
 {
 	int	i;
 
-	i = 0;
 	if (!s)
 		return (-1);
+	i = 0;
 	while (s[i])
 	{
 		if (s[i] == '\n')
