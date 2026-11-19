@@ -6,7 +6,7 @@
 /*   By: aboughad <aboughad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/16 10:29:35 by aboughad          #+#    #+#             */
-/*   Updated: 2026/11/18 16:29:42 by aboughad         ###   ########.fr       */
+/*   Updated: 2026/11/19 14:08:02 by aboughad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,19 @@ char	*get_next_line(int fd)
 	temp = malloc(BUFFER_SIZE + 1);
 	if (!temp)
 		return (NULL);
-	while (!find_newline(stash) && bytes_read > 0)
+	while (find_newline(stash) < 0)
 	{
 		bytes_read = read(fd, temp, BUFFER_SIZE);
-		if (!bytes_read)
-			return (NULL);
+		if (bytes_read <= 0)
+		{
+			line = stash;
+			stash = NULL;
+			return (free(temp), line);
+		}
 		temp[bytes_read] = '\0';
 		stash = ft_strjoin(stash, temp);
 	}
 	line = extract_line(stash, find_newline(stash) + 1);
 	stash = ft_substr(stash, find_newline(stash) + 1);
-	return (line);
+	return (free(temp), line);
 }

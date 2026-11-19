@@ -6,7 +6,7 @@
 /*   By: aboughad <aboughad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/16 15:36:52 by aboughad          #+#    #+#             */
-/*   Updated: 2026/11/18 16:35:42 by aboughad         ###   ########.fr       */
+/*   Updated: 2026/11/19 14:06:16 by aboughad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ int	find_newline(char *s)
 
 	i = 0;
 	if (!s)
-		return(0);
+		return(-1);
 	while (s[i])
 	{
 		if (s[i] == '\n')
 			return (i);
 		i++;
 	}
-	return (0);
+	return (-1);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
@@ -55,7 +55,12 @@ char	*ft_strjoin(char *s1, char *s2)
 	char	*new_str;
 
 	if (!s1)
-		return (s2);
+	{
+		s1 = malloc(1);
+		if (!s1)
+			return (NULL);
+		s1[0] = '\0';
+	}
 	new_str = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
 	if (!new_str)
 		return (NULL);
@@ -78,6 +83,8 @@ char	*ft_substr(char *str, unsigned int start)
 
 	len = ft_strlen(&str[start]) + 1;
 	sub = malloc(len);
+	if (!sub)
+		return (NULL);
 	ft_memcpy(sub, &str[start], len);
 	sub[len - 1] = '\0';
 	free(str);
