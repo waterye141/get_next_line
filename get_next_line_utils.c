@@ -6,7 +6,7 @@
 /*   By: aboughad <aboughad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/16 15:36:52 by aboughad          #+#    #+#             */
-/*   Updated: 2026/11/19 16:08:28 by aboughad         ###   ########.fr       */
+/*   Updated: 2026/11/20 14:30:13 by aboughad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ char	*ft_strjoin(char *s1, char *s2)
 		i++;
 	}
 	new_str[ft_strlen(s1) + i] = '\0';
-	return (free(s1), new_str);
+	free(s1);
+	return (new_str);
 }
 
 char	*ft_substr(char *str, unsigned int start)
@@ -91,5 +92,6 @@ char	*ft_substr(char *str, unsigned int start)
 		return (NULL);
 	ft_memcpy(sub, &str[start], len);
 	sub[len - 1] = '\0';
-	return (free(str), sub);
+	free(str);
+	return (sub);
 }

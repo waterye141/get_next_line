@@ -6,13 +6,11 @@
 /*   By: aboughad <aboughad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/16 10:29:35 by aboughad          #+#    #+#             */
-/*   Updated: 2026/11/19 17:27:09 by aboughad         ###   ########.fr       */
+/*   Updated: 2026/11/20 14:27:44 by aboughad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-#include <stdlib.h>
-#include <unistd.h>
 
 char	*extract_line(char *s, int end)
 {
@@ -33,6 +31,8 @@ char	*get_next_line(int fd)
 	char		*temp;
 	int			bytes_read;
 
+	if (BUFFER_SIZE <= 0)
+		return (NULL);
 	temp = malloc(BUFFER_SIZE + 1);
 	if (!temp)
 		return (NULL);
@@ -41,16 +41,14 @@ char	*get_next_line(int fd)
 		bytes_read = read(fd, temp, BUFFER_SIZE);
 		if (bytes_read <= 0)
 		{
-			free(temp);
 			line = stash[fd];
 			stash[fd] = NULL;
-			return (line);
+			return (free(temp), line);
 		}
 		temp[bytes_read] = '\0';
 		stash[fd] = ft_strjoin(stash[fd], temp);
 	}
-	free(temp);
 	line = extract_line(stash[fd], find_newline(stash[fd]) + 1);
 	stash[fd] = ft_substr(stash[fd], find_newline(stash[fd]) + 1);
-	return (line);
+	return (free(temp), line);
 }

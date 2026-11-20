@@ -6,13 +6,11 @@
 /*   By: aboughad <aboughad@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/16 10:29:35 by aboughad          #+#    #+#             */
-/*   Updated: 2026/11/19 16:17:47 by aboughad         ###   ########.fr       */
+/*   Updated: 2026/11/20 14:28:21 by aboughad         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdlib.h>
-#include <unistd.h>
 
 char	*extract_line(char *s, int end)
 {
